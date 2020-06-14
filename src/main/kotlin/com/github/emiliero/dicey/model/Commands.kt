@@ -1,7 +1,7 @@
-package com.github.emiliero.dicey.handler
+package com.github.emiliero.dicey.model
 
 enum class Commands(var commandString: String) {
-    Tuck("/tuck"){
+    Tuck("!tuck"){
         override fun toString(): String {
             return "Tuck someone in to say good night."
         }
