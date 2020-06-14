@@ -48,7 +48,7 @@ private fun inputTuck(client: DiscordClient) {
             m.channel
         }
         .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
-            "<@$author> tucks in ${fetchTaggedUserInMessage(message)}")
+            "<@$author> tucks ${fetchTaggedUserInMessage(message)}")
         }
         .subscribe()
 }

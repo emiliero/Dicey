@@ -36,8 +36,8 @@ fun fetchTaggedUserInMessage(message: String): String {
 
 private fun checkType(snowflake: String): String {
     return when {
-        snowflake.contains("!", true) -> snowflake
-        snowflake.contains("&", true) -> snowflake + "s"
-        else -> "someone"
+        snowflake.contains("!", true) -> "in $snowflake"
+        snowflake.contains("&", true) -> "in ${snowflake}s"
+        else -> "you in"
     }
 }
