@@ -4,21 +4,8 @@ plugins {
 }
 
 apply plugin: 'idea'
-group 'com.github.emiliero.dicey'
+group 'com.github.emiliero'
 version '1.0-SNAPSHOT'
-
-def apikeyPropertiesFile = rootProject.file("apikey.properties")
-def apikeyProperties = new Properties()
-apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
-
-buildConfig {
-    appName = 'Dicey'
-    version = '0.1.0'
-    clsName = 'BuildConfig'
-    packageName = 'com.github.emiliero.dicey'
-
-    buildConfigField "String", "TOKEN_KEY", apikeyProperties['TOKEN_KEY']
-}
 
 repositories {
     mavenCentral()
@@ -30,17 +17,35 @@ dependencies {
 }
 
 compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
 compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
 
 jar {
     manifest {
-        attributes 'Main-Class': 'Main'
+        attributes 'Main-Class': 'com.github.emiliero.dicey.MainKt'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+// Discord token
+if (rootProject.file("apikey.properties").exists()) {
+    def apikeyPropertiesFile = rootProject.file("apikey.properties")
+    def apikeyProperties = new Properties()
+    apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
+    buildConfig {
+        appName = 'Dicey'
+        version = '0.1.0'
+        clsName = 'BuildConfig'
+        packageName = 'com.github.emiliero.dicey'
+
+        buildConfigField "String", "TOKEN_KEY", apikeyProperties['TOKEN_KEY']
     }
 }
+
 sourceSets {
     main.java.srcDirs += 'src/main/kotlin'
 }
