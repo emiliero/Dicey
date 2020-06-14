@@ -2,17 +2,6 @@ package com.github.emiliero.dicey.handler
 
 import com.github.emiliero.dicey.model.User
 import discord4j.core.`object`.entity.Message
-import java.security.SecureRandom
-
-fun randomNumberGenerator(maxNum: Int): String {
-    val secureRandom = SecureRandom().nextInt(maxNum)
-
-    return if (secureRandom >= 50) {
-        "yes"
-    } else {
-        "no"
-    }
-}
 
 fun getMessageAuthor(m: Message): User {
     val user = m.author.get().username
