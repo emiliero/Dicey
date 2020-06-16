@@ -17,7 +17,9 @@ The bot enables server members to use commands of different varieties, where the
 
 The available commands:
 
+`!cmds`- Lists out all available commands
 `!tuck [user]` - Tucks someone in. If you tag another server member, the bot will tuck that person in.
+`!roll [max-value | min-value max-value | max-value min-value]` - Rolls a dice between a zero and maximum value, or in a range
 
 ## Future features
 
