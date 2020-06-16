@@ -11,6 +11,11 @@ enum class Commands(var command: String) {
             return "Tuck someone in to say good night."
         }
     },
+    Love("!love"){
+        override fun toString(): String {
+            return "Calculates the love between messenger and first value."
+        }
+    },
     Roll("!roll"){
         override fun toString(): String {
             return "Rolls a number between 0 and first value, or between first and second value."

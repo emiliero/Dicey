@@ -1,9 +1,6 @@
 package com.github.emiliero.dicey.controller
 
-import com.github.emiliero.dicey.handler.fetchTaggedUserInMessage
-import com.github.emiliero.dicey.handler.getMessageAuthor
-import com.github.emiliero.dicey.handler.printCommands
-import com.github.emiliero.dicey.handler.randomNumberGenerator
+import com.github.emiliero.dicey.handler.*
 import com.github.emiliero.dicey.model.Commands
 import discord4j.core.DiscordClient
 import discord4j.core.`object`.entity.Message
@@ -15,6 +12,7 @@ import discord4j.core.event.domain.message.MessageCreateEvent
 fun commands(client: DiscordClient) {
     inputCmds(client)
     inputTuck(client)
+    inputLove(client)
     inputRoll(client)
 }
 
@@ -55,6 +53,31 @@ private fun inputTuck(client: DiscordClient) {
         .subscribe()
 }
 
+private fun inputLove(client: DiscordClient) {
+    var author = ""
+    var message = ""
+    // SakamotoLove: 604425012744683540
+    //<:YEPW:687976516495081555>
+
+    client.eventDispatcher.on(MessageCreateEvent::class.java)
+        .map { obj: MessageCreateEvent -> obj.message }
+        .filter { m: Message ->
+            m.author.map { user: User -> !user.isBot }.orElse(false)
+        }
+        .filter { m: Message ->
+            m.content.orElse("").startsWith(Commands.Love.command, ignoreCase = true)
+        }
+        .flatMap { m: Message ->
+            author = getMessageAuthor(m).snowflake
+            message = m.content.get()
+            m.channel
+        }
+        .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
+            "<@$author> loves ${generateLovePercentage(message)}."
+        )}
+        .subscribe()
+}
+
 
 private fun inputRoll(client: DiscordClient) {
     var author = ""
@@ -74,7 +97,7 @@ private fun inputRoll(client: DiscordClient) {
             m.channel
         }
         .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
-            "${randomNumberGenerator(message)}, <@$author>"
+            "${generateRandomNumber(message)}, <@$author>"
         )}
         .subscribe()
 }
