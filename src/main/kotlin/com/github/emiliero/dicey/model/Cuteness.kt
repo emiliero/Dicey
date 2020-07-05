@@ -4,6 +4,6 @@ enum class Cuteness(var level: String) {
     Cute1("Extremely cute"),
     Cute2("Really cute"),
     Cute3("Cute"),
-    Cute4("A little bit cute"),
+    Cute4("A tiny bit cute"),
     Cute5("Eww")
 }
