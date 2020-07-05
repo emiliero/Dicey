@@ -23,7 +23,7 @@ enum class Commands(var command: String) {
     },
     Cute("!cute") {
         override fun toString(): String {
-            return "Rates the cuteness of something within three different levels."
+            return "Rates the cuteness of something/someone within five different levels."
         }
     }
 }

@@ -7,11 +7,11 @@ fun generateCutenessLevel(): String {
     val secureRandom = SecureRandom().nextInt((100 - 0) + 1)
 
     return when (secureRandom) {
-        in 1..8 -> Cuteness.Cute5.level
-        in 9..32 -> Cuteness.Cute4.level
-        in 33..68 -> Cuteness.Cute3.level
-        in 69..92 -> Cuteness.Cute2.level
-        in 93..100 -> Cuteness.Cute1.level
+        in 1..10 -> Cuteness.Cute5.level
+        in 11..34 -> Cuteness.Cute4.level
+        in 35..65 -> Cuteness.Cute3.level
+        in 66..90 -> Cuteness.Cute2.level
+        in 91..100 -> Cuteness.Cute1.level
         else -> "Cute"
     }
 }
