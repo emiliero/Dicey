@@ -20,5 +20,10 @@ enum class Commands(var command: String) {
         override fun toString(): String {
             return "Rolls a number between 0 and first value, or between first and second value."
         }
+    },
+    Cute("!cute") {
+        override fun toString(): String {
+            return "Rates the cuteness of something within three different levels."
+        }
     }
 }

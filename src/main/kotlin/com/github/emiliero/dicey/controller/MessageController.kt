@@ -15,6 +15,7 @@ fun commands(client: DiscordClient) {
     inputTuck(client)
     inputLove(client)
     inputRoll(client)
+    inputCuteness(client)
 }
 
 private fun inputCmds(client: DiscordClient) {
@@ -99,6 +100,29 @@ private fun inputRoll(client: DiscordClient) {
         }
         .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
             "${generateRandomNumber(message)}, <@$author>"
+        )}
+        .subscribe()
+}
+
+private fun inputCuteness(client: DiscordClient) {
+    var author = ""
+    var message = ""
+
+    client.eventDispatcher.on(MessageCreateEvent::class.java)
+        .map { obj: MessageCreateEvent -> obj.message }
+        .filter { m: Message ->
+            m.author.map { user: User -> !user.isBot }.orElse(false)
+        }
+        .filter { m: Message ->
+            m.content.orElse("").contains(Commands.Cute.command, ignoreCase = true)
+        }
+        .flatMap { m: Message ->
+            author = getMessageAuthor(m).snowflake
+            message = m.content.get()
+            m.channel
+        }
+        .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
+            "Cuteness level: ${generateCutenessLevel()}, <@$author>"
         )}
         .subscribe()
 }
