@@ -27,6 +27,8 @@ private fun checkType(snowflake: String): String {
     return when {
         snowflake.contains("!", true) -> "in $snowflake"
         snowflake.contains("&", true) -> "in ${snowflake}s"
+        snowflake.contains("@", true) -> "in $snowflake"
+        snowflake.contains("someone") -> "you in"
         else -> "you in"
     }
 }
