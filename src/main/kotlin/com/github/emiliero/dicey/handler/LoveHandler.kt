@@ -1,20 +1,15 @@
 package com.github.emiliero.dicey.handler
 
+import com.github.emiliero.dicey.databuilders.generateCommandMessageIntoArray
+import com.github.emiliero.dicey.databuilders.generateStringFromCommandArrayAfterCommand
 import java.security.SecureRandom
 
-fun generateLovePercentage(cmdString: String): String {
-    val messageWordArray = cmdString.split("\\s".toRegex())
+fun generateLovePercentage(commandMessage: String): String {
+    val messageWordArray = generateCommandMessageIntoArray(commandMessage)
     val secureRandom = SecureRandom().nextInt((100 - 0) + 1)
 
     return if (messageWordArray.size >= 2) {
-        val lastElementIndexOfMessage = messageWordArray.lastIndexOf(messageWordArray.last())
-        val loveArray = messageWordArray.slice(1..lastElementIndexOfMessage)
-
-        var loveString = ""
-        for (e in loveArray)
-            loveString += "$e "
-
-        "$loveString$secureRandom%"
+        "${generateStringFromCommandArrayAfterCommand(messageWordArray)} $secureRandom%"
     } else {
         "nothing"
     }

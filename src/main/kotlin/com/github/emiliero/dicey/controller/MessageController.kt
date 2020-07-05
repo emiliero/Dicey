@@ -1,5 +1,6 @@
 package com.github.emiliero.dicey.controller
 
+import com.github.emiliero.dicey.databuilders.getMessageAuthor
 import com.github.emiliero.dicey.handler.*
 import com.github.emiliero.dicey.model.Commands
 import discord4j.core.DiscordClient
@@ -48,7 +49,7 @@ private fun inputTuck(client: DiscordClient) {
             m.channel
         }
         .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
-            "<@$author> tucks ${fetchTaggedUserInMessage(message)}"
+            "<@$author> tucks ${checkType(message)}"
         )}
         .subscribe()
 }
