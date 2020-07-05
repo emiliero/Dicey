@@ -15,7 +15,8 @@ fun printCommands() : String {
 
 private fun checkCommand(command: String): String {
     return when (command) {
-        "!tuck" -> "$command [member]"
+        "!tuck" -> "$command [user | value]"
+        "!love" -> "$command [user | values]"
         "!roll" -> "$command [maxValue | maxValue minValue | minValue maxValue]"
         else -> command
     }

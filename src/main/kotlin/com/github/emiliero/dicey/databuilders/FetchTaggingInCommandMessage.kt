@@ -1,4 +1,4 @@
-package com.github.emiliero.dicey.handler
+package com.github.emiliero.dicey.databuilders
 
 import com.github.emiliero.dicey.model.User
 import discord4j.core.`object`.entity.Message
@@ -11,22 +11,12 @@ fun getMessageAuthor(m: Message): User {
     return User(user, discriminator, snowflake)
 }
 
-fun fetchTaggedUserInMessage(message: String): String {
+fun fetchUserSnowflakeInMessage(message: String): String {
     val start = "<"
     val end = ">"
 
     val startIndex = message.indexOf(start)
     val endIndex = message.indexOf(end)
 
-    val snowflake = if (startIndex >= 0 && endIndex >= 0) message.substring(startIndex, endIndex + 1) else "someone"
-
-    return checkType(snowflake)
-}
-
-private fun checkType(snowflake: String): String {
-    return when {
-        snowflake.contains("!", true) -> "in $snowflake"
-        snowflake.contains("&", true) -> "in ${snowflake}s"
-        else -> "you in"
-    }
+    return if (startIndex >= 0 && endIndex >= 0) message.substring(startIndex, endIndex + 1) else "someone"
 }
