@@ -1,5 +1,6 @@
 package com.github.emiliero.dicey.handler
 
+import com.github.emiliero.dicey.databuilders.generateCommandMessageIntoArray
 import java.security.SecureRandom
 //TODO: Tweak so !roll can be at the end of a sentence
 
@@ -15,7 +16,7 @@ fun generateRandomNumber(cmdParameters: String): String {
 }
 
 private fun handleRollCommandParameters(message: String): Array<Int> {
-    val messageCharArray = message.split("\\s".toRegex())
+    val messageCharArray = generateCommandMessageIntoArray(message)
     var maxValue = 0
     var minValue = 0
 
