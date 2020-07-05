@@ -19,9 +19,11 @@ The available commands:
 
 `!cmds`- Lists out all available commands
 
-`!tuck [user]` - Tucks someone in. If you tag another server member, the bot will tuck that person in.
+`!tuck [user | value]` - Tuck someone in to say good night.
 
-`!roll [max-value | min-value max-value | max-value min-value]` - Rolls a dice between a zero and maximum value, or in a range
+`!love [user | values]`- Calculates the love between messenger and first value
+
+`!roll [maxValue | maxValue minValue | minValue maxValue]` - Rolls a number between 0 and first value, or between first and second value.
 
 ## Future features
 
@@ -29,3 +31,4 @@ Features intended to be implemented:
 
 * Weather search
 * Roll dice
+* Cuteness level
