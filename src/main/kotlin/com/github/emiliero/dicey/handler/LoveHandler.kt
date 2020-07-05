@@ -7,8 +7,14 @@ fun generateLovePercentage(cmdString: String): String {
     val secureRandom = SecureRandom().nextInt((100 - 0) + 1)
 
     return if (messageWordArray.size >= 2) {
-        println(messageWordArray[1])
-        "${messageWordArray[1]} $secureRandom%"
+        val lastElementIndexOfMessage = messageWordArray.lastIndexOf(messageWordArray.last())
+        val loveArray = messageWordArray.slice(1..lastElementIndexOfMessage)
+
+        var loveString = ""
+        for (e in loveArray)
+            loveString += "$e "
+
+        "$loveString$secureRandom%"
     } else {
         "nothing"
     }
