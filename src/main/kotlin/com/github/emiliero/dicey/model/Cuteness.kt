@@ -1,9 +1,9 @@
 package com.github.emiliero.dicey.model
 
 enum class Cuteness(var level: String) {
-    Cute1("Extremely cute"),
-    Cute2("Really cute"),
+    Cute1("OUT OF THIS WORLD"),
+    Cute2("Adorable"),
     Cute3("Cute"),
-    Cute4("A tiny bit cute"),
+    Cute4("A tad bit cute"),
     Cute5("Eww")
 }

@@ -7,6 +7,7 @@ import discord4j.core.DiscordClient
 import discord4j.core.`object`.entity.Message
 import discord4j.core.`object`.entity.MessageChannel
 import discord4j.core.`object`.entity.User
+import discord4j.core.`object`.util.Snowflake
 import discord4j.core.event.domain.message.MessageCreateEvent
 
 // TODO: Optimize member tagging
@@ -80,7 +81,6 @@ private fun inputLove(client: DiscordClient) {
         .subscribe()
 }
 
-
 private fun inputRoll(client: DiscordClient) {
     var author = ""
     var message = ""
@@ -106,6 +106,8 @@ private fun inputRoll(client: DiscordClient) {
 
 private fun inputCuteness(client: DiscordClient) {
     var author = ""
+    var taggedUsers = emptyList<Snowflake>()
+    var taggedRoles = emptyList<Snowflake>()
     var message = ""
 
     client.eventDispatcher.on(MessageCreateEvent::class.java)
@@ -119,10 +121,14 @@ private fun inputCuteness(client: DiscordClient) {
         .flatMap { m: Message ->
             author = getMessageAuthor(m).snowflake
             message = m.content.get()
+            taggedUsers = m.userMentionIds.distinct()
+            taggedRoles = m.roleMentionIds.distinct()
             m.channel
         }
         .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
-            "Cuteness level: ${generateCutenessLevel()}, <@$author>"
+            "${fetchTaggedUsers(taggedUsers)} " +
+                    "${detectListSize(taggedUsers)}uteness level: " +
+                    "${generateCutenessLevel()}, <@$author>"
         )}
         .subscribe()
 }
