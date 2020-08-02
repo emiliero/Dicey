@@ -12,7 +12,7 @@ fun checkType(message: String): String {
         snowflake.contains("!", true) -> "in $snowflake"
         snowflake.contains("&", true) -> "in ${snowflake}s"
         snowflake.contains("@", true) -> "in $snowflake"
-        messageArray.size > 1 -> "in ${messageArray[1]}"
-        else -> "you in"
+        messageArray.size > 1 -> "in ${generateStringFromCommandArrayAfterCommand(messageArray)}"
+        else -> message
     }
 }

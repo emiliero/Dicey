@@ -19,11 +19,19 @@ The available commands:
 
 `!cmds`- Lists out all available commands
 
+`!pat` - Pat someone gently.
+
+`!spank` - Spank someone.
+
+`!bonk` - Bonk someone for being too lewd.
+
 `!tuck [user | value]` - Tuck someone in to say good night.
 
 `!love [user | values]`- Calculates the love between messenger and first value
 
 `!roll [maxValue | maxValue minValue | minValue maxValue]` - Rolls a number between 0 and first value, or between first and second value.
+
+`!cute` - Rates the cuteness of something/someone within five different levels.
 
 ## Future features
 

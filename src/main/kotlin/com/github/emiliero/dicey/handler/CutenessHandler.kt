@@ -1,6 +1,6 @@
 package com.github.emiliero.dicey.handler
 
-import com.github.emiliero.dicey.model.Cuteness
+import com.github.emiliero.dicey.model.output.Cuteness
 import discord4j.core.`object`.util.Snowflake
 import java.security.SecureRandom
 
