@@ -3,7 +3,6 @@ package com.github.emiliero.dicey.controller
 import com.github.emiliero.dicey.handler.printCommands
 import com.github.emiliero.dicey.model.Commands
 import discord4j.core.DiscordClient
-import discord4j.core.`object`.Embed
 import discord4j.core.`object`.entity.Message
 import discord4j.core.`object`.entity.MessageChannel
 import discord4j.core.`object`.entity.User

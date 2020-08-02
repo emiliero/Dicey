@@ -11,7 +11,7 @@ import discord4j.core.`object`.presence.Presence
 
 
 fun main(args: Array<String>) {
-    val client: DiscordClient = DiscordClientBuilder(BuildConfig.TOKEN_KEY)
+    val client: DiscordClient = DiscordClientBuilder("NjY0NDg1NDE4NzgzMzQyNTky.XkRXzQ.20YpdahptEj14Qa-KJyON6nGSwc")
         .setInitialPresence(Presence.online(Activity.listening(Commands.Cmds.command)))
         .build()
 

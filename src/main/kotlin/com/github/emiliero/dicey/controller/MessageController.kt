@@ -15,6 +15,8 @@ import discord4j.core.event.domain.message.MessageCreateEvent
 fun commands(client: DiscordClient) {
     inputTuck(client)
     inputPat(client)
+    inputBonk(client)
+
     inputSpank(client)
     inputLove(client)
     inputRoll(client)
@@ -42,6 +44,31 @@ private fun inputPat(client: DiscordClient) {
             ":smiling_face_with_3_hearts: <@!$author> pats ${
                 if (taggedUsers.isNotEmpty()) fetchTaggedUsers(taggedUsers) else "you"
             } gently."
+        )}
+        .subscribe()
+}
+
+private fun inputBonk(client: DiscordClient) {
+    var author = ""
+    var taggedUsers = emptyList<Snowflake>()
+
+    client.eventDispatcher.on(MessageCreateEvent::class.java)
+        .map { obj: MessageCreateEvent -> obj.message }
+        .filter { m: Message ->
+            m.author.map { user: User -> !user.isBot }.orElse(false)
+        }
+        .filter { m: Message ->
+            m.content.orElse("").contains(Commands.Bonk.command, ignoreCase = true)
+        }
+        .flatMap { m: Message ->
+            author = getMessageAuthor(m).snowflake
+            taggedUsers = m.userMentionIds.distinct()
+            m.channel
+        }
+        .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
+            ":cop: <@!$author> bonks ${
+                if (taggedUsers.isNotEmpty()) fetchTaggedUsers(taggedUsers) else "you"
+            } :head_bandage: :hammer:"
         )}
         .subscribe()
 }
