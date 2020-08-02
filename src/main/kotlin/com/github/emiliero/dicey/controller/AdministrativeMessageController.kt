@@ -37,7 +37,7 @@ private fun inputPatchNotes(client: DiscordClient) {
             message.author.map { user: User -> !user.isBot}.orElse(false)
         }
         .filter { message: Message ->
-            message.content.orElse("").contains("!patch", ignoreCase = true)
+            message.content.orElse("").contains(Commands.Patch.command, ignoreCase = true)
         }
         .flatMap { m : Message -> m.channel }
         .flatMap<Message> { channel: MessageChannel ->
