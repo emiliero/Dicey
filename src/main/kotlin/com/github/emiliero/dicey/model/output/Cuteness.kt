@@ -1,4 +1,4 @@
-package com.github.emiliero.dicey.model
+package com.github.emiliero.dicey.model.output
 
 enum class Cuteness(var level: String) {
     Cute1("OUT OF THIS WORLD"),

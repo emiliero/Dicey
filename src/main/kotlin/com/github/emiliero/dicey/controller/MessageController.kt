@@ -13,7 +13,6 @@ import discord4j.core.event.domain.message.MessageCreateEvent
 
 // TODO: Optimize member tagging
 fun commands(client: DiscordClient) {
-    inputCmds(client)
     inputTuck(client)
     inputPat(client)
     inputSpank(client)
@@ -32,7 +31,7 @@ private fun inputPat(client: DiscordClient) {
             m.author.map { user: User -> !user.isBot }.orElse(false)
         }
         .filter { m: Message ->
-            m.content.orElse("").contains(Commands.Pat.command, ignoreCase = true)
+            m.content.orElse("").contains(Commands.Pat.command + " ", ignoreCase = true)
         }
         .flatMap { m: Message ->
             author = getMessageAuthor(m).snowflake
@@ -69,19 +68,6 @@ private fun inputSpank(client: DiscordClient) {
                 if (taggedUsers.isNotEmpty()) fetchTaggedUsers(taggedUsers) else "you"
             } :peach: :flushed:"
         )}
-        .subscribe()
-}
-
-private fun inputCmds(client: DiscordClient) {
-    client.eventDispatcher.on(MessageCreateEvent::class.java)
-        .map { obj: MessageCreateEvent -> obj.message }
-        .filter { message: Message ->
-            message.author.map { user: User -> !user.isBot}.orElse(false)
-        }
-        .filter { message: Message ->
-            message.content.orElse("").contains(Commands.Cmds.command, ignoreCase = true)
-        }.flatMap { m : Message -> m.channel }
-        .flatMap<Message> { channel: MessageChannel -> channel.createMessage(printCommands())}
         .subscribe()
 }
 
