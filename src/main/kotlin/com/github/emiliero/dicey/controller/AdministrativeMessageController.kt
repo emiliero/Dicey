@@ -37,7 +37,7 @@ private fun inputPatchNotes(client: DiscordClient) {
             message.author.map { user: User -> !user.isBot}.orElse(false)
         }
         .filter { message: Message ->
-            message.content.orElse("").contains("!patchnotes", ignoreCase = true)
+            message.content.orElse("").contains("!patch", ignoreCase = true)
         }
         .flatMap { m : Message -> m.channel }
         .flatMap<Message> { channel: MessageChannel ->
@@ -45,13 +45,16 @@ private fun inputPatchNotes(client: DiscordClient) {
                 messageCreateSpec.setEmbed { embedCreateSpec ->
                     embedCreateSpec
                         .setTitle("Patch notes")
-                        .setColor(Color.decode("#75BACE"))
-                        .setDescription("The following patch contains these features:\n" +
+                        .setColor(Color.decode("#5EB0AE"))
+                        .setDescription("The following patch contains the following new commands:\n" +
                                 "`!bonk` - Bonk someone for being too lewd.\n" +
                                 "`!spank` - Spank someone.\n" +
-                                "`!pat` - Pat someone gently.")
+                                "`!pat` - Pat someone gently.\n\n" +
+                                "The following command has been tweaked:\n" +
+                                "`!tuck` - The command output will now be generated with the entirety of the author's message.\n\n" +
+                                "To view the full list of commands, type `!cmds`.")
                         .addField("Version", "0.3.0", true)
-                        .addField("Date", "2nd August 2020", true)
+                        .addField("Date", "2 August 2020", true)
                 }
             }
         }
