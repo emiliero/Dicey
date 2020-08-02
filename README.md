@@ -19,6 +19,8 @@ The available commands:
 
 `!cmds`- Lists out all available commands
 
+`!patch` - Shows the recent changes to the bot.
+
 `!pat` - Pat someone gently.
 
 `!spank` - Spank someone.
