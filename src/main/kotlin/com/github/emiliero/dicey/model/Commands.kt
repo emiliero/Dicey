@@ -11,6 +11,16 @@ enum class Commands(var command: String) {
             return "Tuck someone in to say good night."
         }
     },
+    Pat("!pat"){
+        override fun toString(): String {
+            return "Pat someone gently."
+        }
+    },
+    Spank("!spank"){
+        override fun toString(): String {
+            return "Spank someone."
+        }
+    },
     Love("!love"){
         override fun toString(): String {
             return "Calculates the love between messenger and first value."

@@ -1,5 +1,6 @@
 package com.github.emiliero.dicey.controller
 
+import com.github.emiliero.dicey.databuilders.fetchTaggedUsers
 import com.github.emiliero.dicey.databuilders.getMessageAuthor
 import com.github.emiliero.dicey.handler.*
 import com.github.emiliero.dicey.model.Commands
@@ -14,9 +15,61 @@ import discord4j.core.event.domain.message.MessageCreateEvent
 fun commands(client: DiscordClient) {
     inputCmds(client)
     inputTuck(client)
+    inputPat(client)
+    inputSpank(client)
     inputLove(client)
     inputRoll(client)
     inputCuteness(client)
+}
+
+private fun inputPat(client: DiscordClient) {
+    var author = ""
+    var taggedUsers = emptyList<Snowflake>()
+
+    client.eventDispatcher.on(MessageCreateEvent::class.java)
+        .map { obj: MessageCreateEvent -> obj.message }
+        .filter { m: Message ->
+            m.author.map { user: User -> !user.isBot }.orElse(false)
+        }
+        .filter { m: Message ->
+            m.content.orElse("").contains(Commands.Pat.command, ignoreCase = true)
+        }
+        .flatMap { m: Message ->
+            author = getMessageAuthor(m).snowflake
+            taggedUsers = m.userMentionIds.distinct()
+            m.channel
+        }
+        .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
+            ":smiling_face_with_3_hearts: <@!$author> pats ${
+                if (taggedUsers.isNotEmpty()) fetchTaggedUsers(taggedUsers) else "you"
+            } gently."
+        )}
+        .subscribe()
+}
+
+private fun inputSpank(client: DiscordClient) {
+    var author = ""
+    var taggedUsers = emptyList<Snowflake>()
+
+    client.eventDispatcher.on(MessageCreateEvent::class.java)
+        .map { obj: MessageCreateEvent -> obj.message }
+        .filter { m: Message ->
+            m.author.map { user: User -> !user.isBot }.orElse(false)
+        }
+        .filter { m: Message ->
+            m.content.orElse("").contains(Commands.Spank.command, ignoreCase = true)
+        }
+        .flatMap { m: Message ->
+            author = getMessageAuthor(m).snowflake
+            taggedUsers = m.userMentionIds.distinct()
+            m.channel
+        }
+        .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
+            "<@!$author> spanks ${
+                if (taggedUsers.isNotEmpty()) fetchTaggedUsers(taggedUsers) else "you"
+            } :peach: :flushed:"
+        )}
+        .subscribe()
 }
 
 private fun inputCmds(client: DiscordClient) {
@@ -107,8 +160,8 @@ private fun inputRoll(client: DiscordClient) {
 private fun inputCuteness(client: DiscordClient) {
     var author = ""
     var taggedUsers = emptyList<Snowflake>()
-    var taggedRoles = emptyList<Snowflake>()
-    var message = ""
+    //var taggedRoles = emptyList<Snowflake>()
+    //var message = ""
 
     client.eventDispatcher.on(MessageCreateEvent::class.java)
         .map { obj: MessageCreateEvent -> obj.message }
@@ -120,9 +173,9 @@ private fun inputCuteness(client: DiscordClient) {
         }
         .flatMap { m: Message ->
             author = getMessageAuthor(m).snowflake
-            message = m.content.get()
+            //message = m.content.get()
             taggedUsers = m.userMentionIds.distinct()
-            taggedRoles = m.roleMentionIds.distinct()
+            //taggedRoles = m.roleMentionIds.distinct()
             m.channel
         }
         .flatMap<Message> { channel: MessageChannel -> channel.createMessage(

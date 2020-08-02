@@ -8,33 +8,7 @@ fun detectListSize(taggedUsers: List<Snowflake>): String {
     return if (taggedUsers.isEmpty())
         "C"
     else
-        "c"
-}
-
-fun fetchTaggedUsers(tagged: List<Snowflake>): String {
-    println(tagged.size)
-    if (tagged == emptyList<Snowflake>()) {
-        println("empty")
-        return ""
-    } else {
-        println("full")
-        return if (tagged.size == 1) {
-            "<@!${tagged.first().asString()}>'s"
-        } else {
-            var result = ""
-            for (n in tagged) {
-                result +=  "<@!${n.asString()}>"
-                result += if (tagged.indexOf(n) == tagged.lastIndex) {
-                    "'s"
-                } else if(tagged.indexOf(n)+1 != tagged.lastIndex) {
-                    ", "
-                } else {
-                    " & "
-                }
-            }
-            result
-        }
-    }
+        "'s c"
 }
 
 fun generateCutenessLevel(): String {
