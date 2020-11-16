@@ -47,6 +47,7 @@ private fun inputPatchNotes(client: DiscordClient) {
                         .setColor(Color.decode("#5EB0AE"))
                         .setDescription("Newly added commands:\n" +
                                 "`!poke` - Poke someone. This will only fetch mentioned users as of now.\n" +
+                                "`!boop` - Boop someone. This will only fetch mentioned users as of now.\n" +
                                 "`NEWB` (both singular and plural) will cause the bot to bonk the message's author.\n\n" +
                                 "Updates:\n" +
                                 "`!pat` - You can now tuck several people together.\n" +

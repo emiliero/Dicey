@@ -16,6 +16,7 @@ fun commands(client: DiscordClient) {
     inputPat(client)
     inputBonk(client)
     inputPoke(client)
+    inputBoop(client)
 
     inputSpank(client)
     inputLove(client)
@@ -93,9 +94,34 @@ private fun inputPoke(client: DiscordClient) {
             m.channel
         }
         .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
-            "<@!$author> pokes ${
-                if (taggedUsers.isNotEmpty()) ":point_right:" + fetchTaggedUsers(taggedUsers) else "you"
-            } :head_bandage: :hammer:"
+            "<@!$author>  ${
+                if (taggedUsers.isNotEmpty()) ":point_right: " + fetchTaggedUsers(taggedUsers) else "you"
+            }"
+        )}
+        .subscribe()
+}
+
+private fun inputBoop(client: DiscordClient) {
+    var author = ""
+    var taggedUsers = emptyList<Snowflake>()
+
+    client.eventDispatcher.on(MessageCreateEvent::class.java)
+        .map { obj: MessageCreateEvent -> obj.message }
+        .filter { m: Message ->
+            m.author.map { user: User -> !user.isBot }.orElse(false)
+        }
+        .filter { m: Message ->
+            m.content.orElse("").contains(Commands.Boop.command, ignoreCase = true)
+        }
+        .flatMap { m: Message ->
+            author = getMessageAuthor(m).snowflake
+            taggedUsers = m.userMentionIds.distinct()
+            m.channel
+        }
+        .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
+            "<@!$author> ${
+                if (taggedUsers.isNotEmpty()) " :point_right: " + fetchTaggedUsers(taggedUsers) else "you"
+            }"
         )}
         .subscribe()
 }
@@ -145,7 +171,7 @@ private fun inputTuck(client: DiscordClient) {
         }
         .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
             ":last_quarter_moon_with_face: <@$author> tucks ${
-                if (taggedUsers.isNotEmpty()) fetchTaggedUsers(taggedUsers) else "you"
+                if (taggedUsers.isNotEmpty()) fetchTaggedUsers(taggedUsers) else "you in"
             } :first_quarter_moon_with_face:"
         )}
         .subscribe()

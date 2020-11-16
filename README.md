@@ -27,6 +27,10 @@ The available commands:
 
 `!bonk` - Bonk someone for being too lewd.
 
+`!poke` - Poke someone to wake them up.
+
+`!boop` - Boop someone's nose.
+
 `!tuck [user | value]` - Tuck someone in to say good night.
 
 `!love [user | values]`- Calculates the love between messenger and first value

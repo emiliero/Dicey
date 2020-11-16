@@ -36,6 +36,11 @@ enum class Commands(var command: String) {
             return "Poke someone."
         }
     },
+    Boop("!boop"){
+        override fun toString(): String {
+            return "Boop someone."
+        }
+    },
     Love("!love"){
         override fun toString(): String {
             return "Calculates the love between messenger and first value."

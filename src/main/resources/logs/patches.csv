@@ -1,3 +1,3 @@
 version;date;new;update;removed
+0.4.0;16 November 2020;`!poke` - Poke someone. This will only fetch mentioned users as of now.`!boop` - Boop someone. This will only fetch mentioned users as of now.\n`NEWB` (both singular and plural) will cause the bot to bonk the message's author.;`!pat` - You can now tuck several people together. \n`!pat`, `!spank`, `!bonk`, `!poke` and `!tuck` should work together.;
 0.3.0;2 August 2020;!bonk` - Bonk someone for being too lewd.\n`!spank` - Spank someone.\n`!pat` - Pat someone gently.;The following command has been tweaked: \n`!tuck` - The command output will now be generated with the entirety of the author's message.;
-0.4.0;16 November 2020;`!poke` - Poke someone. This will only fetch mentioned users as of now.\n`NEWB` (both singular and plural) will cause the bot to bonk the message's author.;`!pat` - You can now tuck several people together. \n`!pat`, `!spank`, `!bonk`, `!poke` and `!tuck` should work together.;
