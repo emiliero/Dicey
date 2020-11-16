@@ -109,7 +109,7 @@ private fun inputTuck(client: DiscordClient) {
             m.author.map { user: User -> !user.isBot }.orElse(false)
         }
         .filter { m: Message ->
-            m.content.orElse("").startsWith(Commands.Tuck.command, ignoreCase = true)
+            m.content.orElse("").contains(Commands.Tuck.command, ignoreCase = true)
         }
         .flatMap { m: Message ->
             author = getMessageAuthor(m).snowflake

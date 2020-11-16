@@ -41,4 +41,3 @@ Features intended to be implemented:
 
 * Weather search
 * Roll dice
-* Cuteness level
