@@ -21,6 +21,7 @@ fun commands(client: DiscordClient) {
     inputLove(client)
     inputRoll(client)
     inputCuteness(client)
+    inputNewb(client)
 }
 
 private fun inputPat(client: DiscordClient) {
@@ -199,5 +200,25 @@ private fun inputCuteness(client: DiscordClient) {
         .subscribe()
 }
 
+private fun inputNewb(client: DiscordClient) {
+    var author = ""
 
+    client.eventDispatcher.on(MessageCreateEvent::class.java)
+        .map { obj: MessageCreateEvent -> obj.message }
+        .filter { m: Message ->
+            m.author.map { user: User -> !user.isBot }.orElse(false)
+        }
+        .filter { m: Message ->
+            m.content.orElse("").contains("NEWB", ignoreCase = true)
+        }
+        .flatMap { m: Message ->
+            author = getMessageAuthor(m).snowflake
+            m.channel
+        }
+        .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
+            ":cop: :raised_hand: Freeze! \n " +
+            ":head_bandage: :hammer: <@!$author> is getting bonked for calling others a _NEWB_"
+        )}
+        .subscribe()
+}
 
