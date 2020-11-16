@@ -11,16 +11,17 @@ import discord4j.core.`object`.entity.User
 import discord4j.core.`object`.util.Snowflake
 import discord4j.core.event.domain.message.MessageCreateEvent
 
-// TODO: Optimize member tagging
 fun commands(client: DiscordClient) {
     inputTuck(client)
     inputPat(client)
     inputBonk(client)
+    inputPoke(client)
 
     inputSpank(client)
     inputLove(client)
     inputRoll(client)
     inputCuteness(client)
+
     inputNewb(client)
 }
 
@@ -74,6 +75,31 @@ private fun inputBonk(client: DiscordClient) {
         .subscribe()
 }
 
+private fun inputPoke(client: DiscordClient) {
+    var author = ""
+    var taggedUsers = emptyList<Snowflake>()
+
+    client.eventDispatcher.on(MessageCreateEvent::class.java)
+        .map { obj: MessageCreateEvent -> obj.message }
+        .filter { m: Message ->
+            m.author.map { user: User -> !user.isBot }.orElse(false)
+        }
+        .filter { m: Message ->
+            m.content.orElse("").contains(Commands.Poke.command, ignoreCase = true)
+        }
+        .flatMap { m: Message ->
+            author = getMessageAuthor(m).snowflake
+            taggedUsers = m.userMentionIds.distinct()
+            m.channel
+        }
+        .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
+            "<@!$author> pokes ${
+                if (taggedUsers.isNotEmpty()) ":point_right:" + fetchTaggedUsers(taggedUsers) else "you"
+            } :head_bandage: :hammer:"
+        )}
+        .subscribe()
+}
+
 private fun inputSpank(client: DiscordClient) {
     var author = ""
     var taggedUsers = emptyList<Snowflake>()
@@ -101,7 +127,7 @@ private fun inputSpank(client: DiscordClient) {
 
 private fun inputTuck(client: DiscordClient) {
     var author = ""
-    var message = ""
+    var taggedUsers = emptyList<Snowflake>()
     // peepopat: <:peepoPat:616932471778574356>
 
     client.eventDispatcher.on(MessageCreateEvent::class.java)
@@ -114,11 +140,13 @@ private fun inputTuck(client: DiscordClient) {
         }
         .flatMap { m: Message ->
             author = getMessageAuthor(m).snowflake
-            message = m.content.get()
+            taggedUsers = m.userMentionIds.distinct()
             m.channel
         }
         .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
-            "<@$author> tucks ${checkType(message)}"
+            ":last_quarter_moon_with_face: <@$author> tucks ${
+                if (taggedUsers.isNotEmpty()) fetchTaggedUsers(taggedUsers) else "you"
+            } :first_quarter_moon_with_face:"
         )}
         .subscribe()
 }

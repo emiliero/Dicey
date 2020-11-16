@@ -45,15 +45,15 @@ private fun inputPatchNotes(client: DiscordClient) {
                     embedCreateSpec
                         .setTitle("Patch notes")
                         .setColor(Color.decode("#5EB0AE"))
-                        .setDescription("The following patch contains the following new commands:\n" +
-                                "`!bonk` - Bonk someone for being too lewd.\n" +
-                                "`!spank` - Spank someone.\n" +
-                                "`!pat` - Pat someone gently.\n\n" +
-                                "The following command has been tweaked:\n" +
-                                "`!tuck` - The command output will now be generated with the entirety of the author's message.\n\n" +
-                                "To view the full list of commands, type `!cmds`.")
-                        .addField("Version", "0.3.0", true)
-                        .addField("Date", "2 August 2020", true)
+                        .setDescription("Newly added commands:\n" +
+                                "`!poke` - Poke someone. This will only fetch mentioned users as of now.\n" +
+                                "`NEWB` (both singular and plural) will cause the bot to bonk the message's author.\n\n" +
+                                "Updates:\n" +
+                                "`!pat` - You can now tuck several people together.\n" +
+                                "`!pat`, `!spank`, `!bonk`, `!poke` and `!tuck` should work together.\n\n" +
+                                "To view the full list of commands, type `!cmds`")
+                        .addField("Version", "0.4.0", true)
+                        .addField("Date", "16 November 2020", true)
                 }
             }
         }
