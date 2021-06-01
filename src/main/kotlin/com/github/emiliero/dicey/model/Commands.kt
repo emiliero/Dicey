@@ -55,5 +55,10 @@ enum class Commands(var command: String) {
         override fun toString(): String {
             return "Rates the cuteness of something/someone within five different levels."
         }
+    },
+    Hug("!hug") {
+        override fun toString(): String {
+            return "Hug someone."
+        }
     }
 }

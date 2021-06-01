@@ -24,6 +24,7 @@ fun commands(client: DiscordClient) {
     inputCuteness(client)
 
     inputNewb(client)
+    inputHug(client)
 }
 
 private fun inputPat(client: DiscordClient) {
@@ -276,3 +277,27 @@ private fun inputNewb(client: DiscordClient) {
         .subscribe()
 }
 
+private fun inputHug(client: DiscordClient) {
+    var author = ""
+    var taggedUsers = emptyList<Snowflake>()
+
+    client.eventDispatcher.on(MessageCreateEvent::class.java)
+        .map { obj: MessageCreateEvent -> obj.message }
+        .filter { m: Message ->
+            m.author.map { user: User -> !user.isBot }.orElse(false)
+        }
+        .filter { m: Message ->
+            m.content.orElse("").contains(Commands.Hug.command, ignoreCase = true)
+        }
+        .flatMap { m: Message ->
+            author = getMessageAuthor(m).snowflake
+            taggedUsers = m.userMentionIds.distinct()
+            m.channel
+        }
+        .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
+            ":hugging: <@$author> hugs ${
+                if (taggedUsers.isNotEmpty()) fetchTaggedUsers(taggedUsers) else "themself"
+            } :people_hugging:"
+        )}
+        .subscribe()
+}
