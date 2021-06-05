@@ -46,13 +46,7 @@ private fun inputPatchNotes(client: DiscordClient) {
                         .setTitle("Patch notes")
                         .setColor(Color.decode("#5EB0AE"))
                         .setDescription("Newly added commands:\n" +
-                                "`!poke` - Poke someone. This will only fetch mentioned users as of now.\n" +
-                                "`!boop` - Boop someone. This will only fetch mentioned users as of now.\n" +
-                                "`NEWB` (both singular and plural) will cause the bot to bonk the message's author.\n" +
-                                "`!hug` - Hug someone. This will only fetch mentioned users as of now.\n\n" +
-                                "Updates:\n" +
-                                "`!pat` - You can now tuck several people together.\n" +
-                                "`!pat`, `!spank`, `!bonk`, `!poke` and `!tuck` should work together.\n\n" +
+                                "`!hug` - Hug someone. This will only fetch mentioned users.\n\n" +
                                 "To view the full list of commands, type `!cmds`")
                         .addField("Version", "0.5.0", true)
                         .addField("Date", "1 June 2021", true)
