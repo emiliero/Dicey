@@ -47,9 +47,12 @@ private fun inputPatchNotes(client: DiscordClient) {
                         .setColor(Color.decode("#5EB0AE"))
                         .setDescription("Newly added commands:\n" +
                                 "`!hug` - Hug someone. This will only fetch mentioned users.\n\n" +
+                                "Updated:\n" +
+                                "`!boop` - New output format with emojis and text.\n" +
+                                "`!spank` - New output format with emojis.\n\n" +
                                 "To view the full list of commands, type `!cmds`")
                         .addField("Version", "0.5.0", true)
-                        .addField("Date", "1 June 2021", true)
+                        .addField("Date", "6 June 2021", true)
                 }
             }
         }

@@ -120,8 +120,8 @@ private fun inputBoop(client: DiscordClient) {
             m.channel
         }
         .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
-            "<@!$author> ${
-                if (taggedUsers.isNotEmpty()) " :point_right: " + fetchTaggedUsers(taggedUsers) else "you"
+            ":point_right: :relaxed: <@!$author> ${
+                if (taggedUsers.isNotEmpty()) " boops " + fetchTaggedUsers(taggedUsers) else "you"
             }"
         )}
         .subscribe()
@@ -145,9 +145,9 @@ private fun inputSpank(client: DiscordClient) {
             m.channel
         }
         .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
-            "<@!$author> spanks ${
+            ":peach: :wave: <@!$author> spanks ${
                 if (taggedUsers.isNotEmpty()) fetchTaggedUsers(taggedUsers) else "you"
-            } :peach: :flushed:"
+            } :flushed:"
         )}
         .subscribe()
 }
