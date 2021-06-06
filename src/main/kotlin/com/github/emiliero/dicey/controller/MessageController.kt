@@ -121,7 +121,7 @@ private fun inputBoop(client: DiscordClient) {
         }
         .flatMap<Message> { channel: MessageChannel -> channel.createMessage(
             ":point_right: :relaxed: <@!$author> ${
-                if (taggedUsers.isNotEmpty()) " boops " + fetchTaggedUsers(taggedUsers) else "you"
+                if (taggedUsers.isNotEmpty()) " boops " + fetchTaggedUsers(taggedUsers) else "boops you"
             }"
         )}
         .subscribe()
