@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import com.github.emiliero.dicey.model.PatchNote
 import com.github.emiliero.dicey.model.PatchNotes
 
-class ItemDeserializer @JvmOverloads constructor(vc: Class<*>? = null) : StdDeserializer<PatchNotes?>(vc) {
+class PatchNoteDeserializer @JvmOverloads constructor(vc: Class<*>? = null) : StdDeserializer<PatchNotes?>(vc) {
     override fun deserialize(jsonParser: JsonParser, context: DeserializationContext): PatchNotes {
         val patchNotes = ArrayList<PatchNote>()
         val node = jsonParser.codec.readTree<JsonNode>(jsonParser)
