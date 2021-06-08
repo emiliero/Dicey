@@ -16,19 +16,16 @@ fun generatePatchNotes(patchNote: PatchNote): String {
     var message = ""
 
     val new = patchNote.new
-    println(new.size)
     if(new.size > 0) {
         message += "Newly added commands:\n ${new.joinToString("\n")} \n\n"
     }
 
     val update = patchNote.update
-    println(update.size)
     if(update.size > 0) {
         message += "Updated commands:\n ${update.joinToString("\n")} \n\n"
     }
 
     val removed = patchNote.removed
-    println(removed.size)
     if(removed.size > 0) {
         message += "Removed commands:\n ${removed.joinToString("\n")} \n\n"
     }
