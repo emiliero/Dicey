@@ -1,6 +1,9 @@
 package com.github.emiliero.dicey.controller
 
+import com.github.emiliero.dicey.handler.generatePatchNotes
+import com.github.emiliero.dicey.handler.getPatchNotes
 import com.github.emiliero.dicey.handler.printCommands
+import com.github.emiliero.dicey.handler.readFile
 import com.github.emiliero.dicey.model.Commands
 import discord4j.core.DiscordClient
 import discord4j.core.`object`.entity.Message
@@ -8,6 +11,8 @@ import discord4j.core.`object`.entity.MessageChannel
 import discord4j.core.`object`.entity.User
 import discord4j.core.event.domain.message.MessageCreateEvent
 import java.awt.Color
+import java.nio.file.Paths
+import java.util.logging.FileHandler
 
 
 fun adminCommands(client: DiscordClient) {
@@ -42,17 +47,13 @@ private fun inputPatchNotes(client: DiscordClient) {
         .flatMap<Message> { channel: MessageChannel ->
             channel.createMessage { messageCreateSpec ->
                 messageCreateSpec.setEmbed { embedCreateSpec ->
+                    val patchNote = getPatchNotes().getLatestPatchNote()
                     embedCreateSpec
                         .setTitle("Patch notes")
                         .setColor(Color.decode("#5EB0AE"))
-                        .setDescription("Newly added commands:\n" +
-                                "`!hug` - Hug someone. This will only fetch mentioned users.\n\n" +
-                                "Updated:\n" +
-                                "`!boop` - New output format with emojis and text.\n" +
-                                "`!spank` - New output format with emojis.\n\n" +
-                                "To view the full list of commands, type `!cmds`")
-                        .addField("Version", "0.5.0", true)
-                        .addField("Date", "6 June 2021", true)
+                        .setDescription(generatePatchNotes(patchNote))
+                        .addField("Version", patchNote.version, true)
+                        .addField("Date", patchNote.date, true)
                 }
             }
         }
