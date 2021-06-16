@@ -1,0 +1,40 @@
+{
+  "0.3.0": {
+    "version": "0.3.0",
+    "date": "2 August 2020",
+    "new":  [
+      "`!bonk` - Bonk someone for being too lewd.",
+      "`!spank` - Spank someone.",
+      "`!pat` - Pat someone gently."
+    ],
+    "update": [
+      "The following command has been tweaked: `!tuck` - The command output will now be generated with the entirety of the author's message."
+    ],
+    "removed": []
+  },
+  "0.4.0": {
+    "version": "0.4.0",
+    "date": "2 August 2020",
+    "new":  [
+      "`!bonk` - Bonk someone for being too lewd.",
+      "`!spank` - Spank someone.",
+      "`!pat` - Pat someone gently."
+    ],
+    "update": [
+      "The following command has been tweaked: `!tuck` - The command output will now be generated with the entirety of the author's message."
+    ],
+    "removed": []
+  },
+  "0.5.0": {
+    "version": "0.5.0",
+    "date": "6 June 2021",
+    "new":  [
+      "`!hug` - Hug someone. This will only fetch mentioned users."
+    ],
+    "update": [
+      "`!boop` - New output format with emojis and text.",
+      "`!spank` - New output format with emojis."
+    ],
+    "removed": []
+  }
+}
